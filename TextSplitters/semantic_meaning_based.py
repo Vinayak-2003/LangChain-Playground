@@ -1,15 +1,11 @@
 from semantic_chunker_langchain.chunker import SemanticChunker
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
 
 load_dotenv()
 
-embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
-)
-
 splitter = SemanticChunker(
-    embeddings,
+    GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001"),
     breakpoint_threshold_type="standard_deviation",
     breakpoint_threshold_amount=1
 )
